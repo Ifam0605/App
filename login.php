@@ -1,15 +1,49 @@
 <?php
 include 'libs/load.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
 
 <head>
     <?php load_template('_head') ; ?>
+
 </head>
 
 <body>
+
+
+
+    <style>
+    /* ..................................*/
+
+    html,
+    body {
+        height: 100%;
+    }
+
+    .form-signin {
+        max-width: 330px;
+        padding: 1rem;
+    }
+
+    .form-signin .form-floating:focus-within {
+        z-index: 2;
+    }
+
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    </style>
+
+
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="check2" viewBox="0 0 16 16">
             <path
@@ -85,9 +119,9 @@ include 'libs/load.php';
 
     </header>
     <main>
-        <?php load_template('_calltoaction'); ?>
 
-        <?php load_template('_photogram'); ?>
+        <?php load_template('_login'); ?>
+
     </main>
     <footer class="text-body-secondary py-5">
 
