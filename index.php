@@ -6,25 +6,20 @@ include 'libs/load.php';
 <html lang="en" data-bs-theme="auto">
 
 <head>
-    <?php load_template('_head') ; ?>
+    <?php load_template('_head'); ?>
 </head>
 
-<body>
-    <?php load_template('_them') ;
-     ?>
+<body> 
+    <?php load_template('_theme');?>
     <header data-bs-theme="dark">
-        <?php load_template('_header') ; ?>
-
+     <?php load_template('_header'); ?>
     </header>
-    <main>
+   <main>
         <?php load_template('_calltoaction'); ?>
-
         <?php load_template('_photogram'); ?>
     </main>
     <footer class="text-body-secondary py-5">
-
-        <?php load_template('_footer'); ?>
-
+            <?php load_template('_footer'); ?>
     </footer>
     <script src="./assets/dist/js/bootstrap.bundle.min.js" class="astro-vvvwv3sm"></script>
 </body>
