@@ -30,6 +30,26 @@ VALUES (NULL, '$Username', '$Password', '$email', '$phone', '0', '0')";
 
 }
 
+public static function login($Username, $Password){
+        $Password = md5($Password); 
+        $qury = "SELECT * FROM `auth` WHERE `username` = 'root'";
+        $conn = Database::getConnction();
+        $result = $conn->query($qury);
+
+        if($result->num_rows == 1){
+            $row = $result->fetch_assoc();
+            if($row['password'] === $Password){
+                return true;
+        }
+        else{
+            return false;
+        }
+    }
+    else{
+        return false;
+    }
+}
+
 public function __construct($Username){
     $this->conn = Database::getConnction();
     $this->conn->query();
