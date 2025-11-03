@@ -1,38 +1,40 @@
 <?php
+
+//include './libs/load.php';
+
 include 'libs/load.php';
-$user = "root";
+
+$user = "suser3";
 $pass = "123";
 $result = null;
 
-
 if(isset($_GET['logout'])){
-   
     Session::destroy();
-    die("destroyed session,<br> <br><a href='logintest.php'>Login Again</a>");
+    die("Session Destroyed <br> <br> <a href='logintest.php'>Login Again </a> ");
 }
 
-if (Session::get("is_loggedin")) {
-    $userdata = Session::get("session_user");
-    // print_r($userdata);
-    print("Welcome back, $userdata[username]<br>");
+if (Session::get('is_loggedin')) {
+    $userdata = Session::get('session_user');
+    //print_r($userdata);
+    print("Welcome Back, " . $userdata['username'] . "<br>");
     $result = $userdata;
-    
 } else {
-    print("No session found, trying to login now.<br>");
+    print ("No Session Found, trying to login now.<br>");
     $result = User::login($user, $pass);
     //print_r($result);
 
     if ($result) {
-        echo ("<br>Login successful, $result[username]<br>");
+        echo "Login successful! " . $result['username'];
         Session::set('is_loggedin', true);
         Session::set('session_user', $result);
     } else {
-        echo ("Login failed");
+        echo "Invalid username or password.";
     }
 }
 
 echo <<< EOL
+<br><br><a href="logintest.php?logout">Logout</a>
+EOL
 
-<br><br>
-<a href="logintest.php?logout=true">Log out</a>
-EOL ;
+
+?>
