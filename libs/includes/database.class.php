@@ -3,7 +3,7 @@
 class Database
 {
     public static $conn = null;
-    public static function getConnction()
+    public static function getConnection()
     {
         if (Database::$conn == null) {
             $servername = "localhost";
@@ -21,7 +21,7 @@ class Database
                 echo "Connection failed: " . $connection->connect_error;
 
             } else {
-                echo "Connected successfully...... assing new connection";
+              //   echo "Connected successfully...... assing new connection";
                 Database::$conn = $connection;
                 return Database::$conn;
             }

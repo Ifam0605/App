@@ -1,45 +1,53 @@
 <?php
 
-class User {
-    private $conn;
-    public static function singup($Username, $Password, $email, $phone)
+class user
+
 {
+    
+    private $conn;
+   public static function singup($Username, $email, $Password, $phone)
+    {
+        
+        $Password = md5($Password); // Note: Using md5 for password hashing is not secure. Consider using password_hash() instead.
 
-     $Password = md5($Password);
+       // $Password = md5(sha1(md5($Password))); // Double hashing for added security (not recommended, use password_hash instead)
+        
+        //$Password = password_hash($Password, PASSWORD_BCRYPT); // Final hashing with bcrypt
 
-    $conn = Database::getConnction();
+        //$Password = md5(strrev(md5($Password)));
+
+        $conn = Database::getConnection();
+                          
+
+        $sql = "INSERT INTO `auth` (`id`, `username`, `email`, `password`, `phone`, `blocked`, `active`) VALUES (NULL, '$Username', '$email', '$Password', '$phone', '0', '0')";
+
+        $error  = false;
 
 
-    $sql = "INSERT INTO `auth` (`id`, `username`, `password`, `email`, `phone`, `blocked`, `active`) 
-VALUES (NULL, '$Username', '$Password', '$email', '$phone', '0', '0')";
 
-    $error = false;
+        if ($conn->query($sql) === TRUE) {
+            $error = false;
+        } else {
+            $error = $conn->error;
+        }
 
-    if ($conn->query($sql) === TRUE) {
-        $error = false;
-    } else {
-        //echo "Error: " . $sql . "<br>" . $conn->error;
-        $error = $conn->error;
+        $conn->close();
+        return $error;
+        
     }
 
-    $conn->close();
 
-    return $error;
-
-
-
-}
-
-public static function login($Username, $Password){
+    public static function login($Username, $Password){
         $Password = md5($Password); 
-        $qury = "SELECT * FROM `auth` WHERE `username` = 'root'";
-        $conn = Database::getConnction();
+        $qury = "SELECT * FROM `auth` WHERE `username` = '$Username'";
+        $conn = Database::getConnection();
         $result = $conn->query($qury);
 
         if($result->num_rows == 1){
             $row = $result->fetch_assoc();
+           // print_r($row );
             if($row['password'] === $Password){
-                return true;
+                return $row;
         }
         else{
             return false;
@@ -49,39 +57,41 @@ public static function login($Username, $Password){
         return false;
     }
 }
+   
 
-public function __construct($Username){
-    $this->conn = Database::getConnction();
-    $this->conn->query();
+    public function _construct($Username)
+    {
+        $this->conn = Database::getConnection();
+        $this->conn->query();
+    }
 
-}
+    public static function authentication ()
+    {
+        
 
+        
+    }
 
-public static function authenticate ()
-{
+    public static function getBio()
+    {
+        
 
-}
+        
+    }
 
-public static function getBio ()
-{
+    public static function setBio()
+    {
+        
+
+        
+    }
+
+    public static function getAvatar()
+    {
+        
+
+        
+    }
+
     
 }
-
-public static function setBio ()
-{
-    
-}
-
-public static function getAvatar ()
-{
-    
-}
-
-public static function setAvatar ()
-{
-    
-}
-}
-
-
-?>
